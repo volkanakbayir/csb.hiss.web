@@ -11,9 +11,9 @@
 
 <script>
 import store from './store';
-import header from './components/Header';
-import navigation from './components/Navigation';
-import footer from './components/Footer';
+import header from './components/header';
+import navigation from './components/navigation';
+import footer from './components/footer';
 import { createNamespacedHelpers } from 'vuex';
 const { mapState, mapActions } = createNamespacedHelpers('$_layout');
 export default {

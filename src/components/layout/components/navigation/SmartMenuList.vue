@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SmartMenuListItem from './SmartMenuListItem';
+import SmartMenuListItem from './smartMenuListItem';
 import Vue from 'vue';
 
 let comp = Vue.component('smart-menu-list', {

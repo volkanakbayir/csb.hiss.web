@@ -15,7 +15,7 @@
 </transition>
 </template>
 <script>
-import SmartMenuList from './SmartMenuList';
+import SmartMenuList from './smartMenuList';
 import { mapActions } from 'vuex';
 
 export default {

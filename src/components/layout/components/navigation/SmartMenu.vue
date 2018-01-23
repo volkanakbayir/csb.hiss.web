@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SmartMenuList from './SmartMenuList';
+import SmartMenuList from './smartMenuList';
 
 export default {
 	props: ['rawItems'],

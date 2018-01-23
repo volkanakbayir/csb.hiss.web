@@ -16,7 +16,7 @@
     </aside>
 </template>
 <script>
-import SmartMenu from '@/components/layout/components/navigation/SmartMenu';
+import SmartMenu from '@/components/layout/components/navigation/smartMenu';
 import { mapGetters } from 'vuex';
 export default {
 	components: {
