@@ -5,14 +5,14 @@
 				<span> <!-- User image size is adjusted inside CSS, it should stay as is --> 	
 					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
 						<span>
-							john.doe 
+							Test Kullanıcı 
 						</span> 
 					</a> 
 				</span>
 			</div>
 			<!-- end user info -->
 		<nav>
-			<smart-menu-list :items="menuItems"></smart-menu-list>
+			<smart-menu-list :raw-menu-data="menuItems"></smart-menu-list>
 		</nav>
         <!-- <minify-menu></minify-menu> -->
     </aside>

@@ -3,7 +3,7 @@ import actions from './actions'
 import mutations from './mutations'
 let store = {
     state: {
-        menuItems: []
+        menuItems: {}
     },
     actions,
     getters,

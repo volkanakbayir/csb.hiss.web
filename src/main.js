@@ -15,6 +15,7 @@ import 'bootstrap'
 import 'babel-polyfill'
 import SmartConfig from './assets/smartadmin/config/config'
 import store from './store';
+import VueSimpleMenu from 'vue-simple-menu'
 
 window.SMARTADMIN_GLOBALS = SmartConfig
 Vue.config.productionTip = false
@@ -24,6 +25,9 @@ new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {
+    App,
+    'vue-simple-menu': VueSimpleMenu
+  },
   template: '<App/>',
 })

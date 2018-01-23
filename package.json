@@ -13,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^3.3.6",
     "classnames": "^2.2.5",
@@ -24,6 +25,8 @@
     "sass-loader": "^6.0.6",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue-simple-menu": "0.0.12",
+    "vuelidate": "^0.6.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

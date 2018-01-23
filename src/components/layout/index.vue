@@ -3,7 +3,9 @@
         <ba-header></ba-header>
         <ba-navigation></ba-navigation>
         <div id="main" role="main">
-            <router-view></router-view>
+            <transition  name="slide" mode="out-in">
+              <router-view></router-view>     
+            </transition>
         </div>
         <ba-footer></ba-footer>
     </div>
@@ -33,3 +35,18 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.slide-enter {
+	opacity: 0;
+}
+.slide-enter-active {
+	transition: opacity 0.4s;
+}
+
+.slide-leave {
+}
+.slide-leave-active {
+	transition: opacity 0.4s;
+	opacity: 0;
+}
+</style>
