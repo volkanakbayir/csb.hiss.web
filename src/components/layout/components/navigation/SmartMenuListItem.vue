@@ -2,7 +2,7 @@
 	<ul>
 		<li v-for="item in menu" :key="item.id" :class="{'open': item.expanded, expanded: item.expanded , active : item.active }">
 			<template v-if="item.vueRouter">
-				<router-link :to="item.uri" active-class="" exact-active-class="" @toggleActive="activate(item)">
+				<router-link :to="item.uri" active-class="" exact-active-class="" @click.native="activate(item)">
 					<i v-if="item.icon" :class="item.icon"></i>
 					<span>{{item.name}}</span>
 				</router-link>
@@ -22,7 +22,7 @@
 				<span  @click="expandTrigger(item)">{{item.name}}</span>
 			</template>
 			<transition name="slide-toggle" mode="out-in">
-				<smart-menu-list-item v-if="item.list && item.expanded" :menu="item.list"></smart-menu-list-item> 
+				<smart-menu-list-item v-if="item.list && item.expanded" :menu="item.list" ></smart-menu-list-item> 
 			</transition>
 		</li>
 	</ul>
@@ -38,8 +38,15 @@ export default {
 		},
 	},
 	methods: {
-		activate(item){
-			item.active = true;
+		findSmartMenuParent(item) {
+			if (!item) return null;
+			if ('_handleNav' in item.$parent) return item;
+			return this.findSmartMenuParent(item.$parent);
+		},
+		activate(item) {
+			var $smartParent = this.findSmartMenuParent(this);
+			$smartParent.$parent._handleNav(item)
+			this.$forceUpdate();
 		},
 		expandTrigger(item) {
 			if (item.expand) item.expanded = !item.expanded;

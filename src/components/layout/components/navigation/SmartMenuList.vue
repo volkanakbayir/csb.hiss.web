@@ -25,7 +25,7 @@ export default {
 	mounted() {
 		if (this.rawMenuData) {
 			var routeList = this.generateBranch(this.rawMenuData);
-			this.bindHierarchy(routeList);			
+			this.bindHierarchy(routeList);
 			this.adjustForUrl(routeList);
 			this.list = routeList;
 		}
@@ -33,17 +33,28 @@ export default {
 	watch: {
 		rawMenuData() {
 			var routeList = this.generateBranch(this.rawMenuData);
-			this.bindHierarchy(routeList);						
+			this.bindHierarchy(routeList);
 			this.adjustForUrl(routeList);
 			this.list = routeList;
 		},
 	},
 	methods: {
 		parentCallback(item, cb) {
-			if (item) {
-				cb(item);
-				if (item.parent) this.parentCallback(item.parent, cb);
+			if (item.parent) {
+				cb(item.parent);
+				this.parentCallback(item.parent, cb);
 			}
+		},
+		_handleNav(navItem) {
+			var flattened = [];
+			this.flattenUriComponents(this.list, flattened);
+			_.each(flattened, d => {
+				d.active = false;
+				d.expanded = false;
+			});
+			navItem.active = true;
+			this.parentCallback(navItem, d => (d.expanded = true));
+			this.$forceUpdate();
 		},
 		flattenUriComponents(items, container) {
 			for (var i in items) {
@@ -91,6 +102,6 @@ export default {
 			});
 		},
 	},
-	template: '<smart-menu-list-item :menu="list" />',
+	template: '<smart-menu-list-item :menu="list" @handleNav="_handleNav" />',
 };
 </script>
