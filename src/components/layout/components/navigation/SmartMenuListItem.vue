@@ -1,6 +1,6 @@
 <template>
 <transition>
-    <router-link tag="li" active-class="active" :to="menuItem.route" @click="selectMenu(menuItem)" exact-active-class="active" exact>
+    <router-link tag="li"  :to="menuItem.route" @click="selectMenu(menuItem)" active-class="open" exact-active-class="active" exact>
         <a>
             <i :class="menuItem.icon"></i> 
             <span class="menu-item-parent">{{ menuItem.title }}</span>

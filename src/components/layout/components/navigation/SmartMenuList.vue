@@ -10,7 +10,7 @@ import Vue from 'vue';
 
 let comp = Vue.component('smart-menu-list', {
 	name: 'smart-menu-list',
-	props: ['items', 'active'],
+	props: ['items'],
 	components: {
 		SmartMenuListItem,
 	},

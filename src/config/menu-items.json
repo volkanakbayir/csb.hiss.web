@@ -13,7 +13,7 @@
                 {
                     "title": "Test",
                     "icon": "fa fa-lg fa-fw fa-check",
-                    "route": "/test"
+                    "route": "/test2"
                 }
             ]
         }

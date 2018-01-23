@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomeRoute from '../modules/home' 
+import HomeRoute from '../modules/home'
 
 Vue.use(Router)
 
@@ -13,7 +13,12 @@ export default new Router({
     { path: '', component: HomeRoute, },
     {
       path: '/test', component: () => {
-          return lazyImport('test');
+        return lazyImport('test');
+      },
+    },
+    {
+      path: '/test2', component: () => {
+        return lazyImport('test2');
       },
     }
   ],
