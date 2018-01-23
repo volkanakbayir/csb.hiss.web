@@ -1,0 +1,21 @@
+{
+    "items": [
+        {
+            "title": "Blank",
+            "icon": "fa fa-lg fa-fw fa-home",
+            "route": "/"
+        },
+        {
+            "title": "Test",
+            "icon": "fa fa-lg fa-fw fa-check",
+            "route": "/test",
+            "children": [
+                {
+                    "title": "Test",
+                    "icon": "fa fa-lg fa-fw fa-check",
+                    "route": "/test"
+                }
+            ]
+        }
+    ]
+}
