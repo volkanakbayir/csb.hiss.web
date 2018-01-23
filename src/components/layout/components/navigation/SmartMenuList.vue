@@ -1,5 +1,7 @@
 <script>
 import SmartMenuListItem from './smartMenuListItem.vue';
+import 'lodash';
+
 export default {
 	name: 'SmartMenuList',
 	components: {
@@ -22,17 +24,54 @@ export default {
 	},
 	mounted() {
 		if (this.rawMenuData) {
-			this.list = this.generateBranch(this.rawMenuData);
+			var routeList = this.generateBranch(this.rawMenuData);
+			this.bindHierarchy(routeList);			
+			this.adjustForUrl(routeList);
+			this.list = routeList;
 		}
 	},
 	watch: {
 		rawMenuData() {
-			this.list = this.generateBranch(this.rawMenuData);
+			var routeList = this.generateBranch(this.rawMenuData);
+			this.bindHierarchy(routeList);						
+			this.adjustForUrl(routeList);
+			this.list = routeList;
 		},
 	},
-	methods: { 
+	methods: {
+		parentCallback(item, cb) {
+			if (item) {
+				cb(item);
+				if (item.parent) this.parentCallback(item.parent, cb);
+			}
+		},
+		flattenUriComponents(items, container) {
+			for (var i in items) {
+				if (items[i].list) this.flattenUriComponents(items[i].list, container);
+				container.push(items[i]);
+			}
+		},
+		adjustForUrl(routeList) {
+			var path = window.location.pathname;
+			var flattened = [];
+			this.flattenUriComponents(routeList, flattened);
+			var sorted = _.sortBy(flattened, d => {
+				return d.uri && d.uri.length;
+			});
+			sorted.reverse();
+
+			var pathFound = _.find(sorted, d => {
+				var pathIndex = path.indexOf(d.uri);
+				return pathIndex > -1 && pathIndex < 2;
+			});
+
+			if (pathFound) {
+				pathFound.active = true;
+				this.parentCallback(pathFound, d => (d.expanded = true));
+			}
+		},
 		generateBranch(menuBranch) {
-			return Object.keys(menuBranch).reduce((acc, item) => {
+			var branch = Object.keys(menuBranch).reduce((acc, item) => {
 				let menuItem = { ...menuBranch[item] };
 
 				if (menuItem.list) menuItem.list = this.generateBranch(menuItem.list);
@@ -41,9 +80,15 @@ export default {
 					menuItem.expand = true;
 					menuItem.expanded = false;
 				}
-				menuItem.parent = menuBranch;
 				return acc.concat(menuItem);
 			}, []);
+			return branch;
+		},
+		bindHierarchy(branch, parentItem) {
+			_.each(branch, d => {
+				d.parent = parentItem;
+				d.list && this.bindHierarchy(d.list, d);
+			});
 		},
 	},
 	template: '<smart-menu-list-item :menu="list" />',

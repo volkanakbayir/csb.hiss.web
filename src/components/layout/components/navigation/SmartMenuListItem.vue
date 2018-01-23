@@ -2,7 +2,7 @@
 	<ul>
 		<li v-for="item in menu" :key="item.id" :class="{'open': item.expanded, expanded: item.expanded , active : item.active }">
 			<template v-if="item.vueRouter">
-				<router-link :to="item.uri" active-class="" exact-active-class="">
+				<router-link :to="item.uri" active-class="" exact-active-class="" @toggleActive="activate(item)">
 					<i v-if="item.icon" :class="item.icon"></i>
 					<span>{{item.name}}</span>
 				</router-link>
@@ -38,6 +38,9 @@ export default {
 		},
 	},
 	methods: {
+		activate(item){
+			item.active = true;
+		},
 		expandTrigger(item) {
 			if (item.expand) item.expanded = !item.expanded;
 		},
@@ -51,16 +54,16 @@ export default {
 }
 .slide-toggle-enter-active,
 .slide-toggle-leave-active {
-     transition: opacity 0.3s;
+	transition: opacity 0.3s;
 }
 .slide-toggle-enter-active {
-     opacity: 1;
+	opacity: 1;
 }
 .slide-toggle-enter,
 .slide-toggle-leave-active {
-    opacity: 0;
+	opacity: 0;
 }
 .slide-toggle-leave {
-    opacity: 1;
-} 
+	opacity: 1;
+}
 </style>
