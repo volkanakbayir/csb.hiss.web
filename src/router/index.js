@@ -13,7 +13,7 @@ export default new Router({
     { path: '', component: HomeRoute, },
     {
       path: '/test', component: () => {
-          return lazyImport('Test');
+          return lazyImport('test');
       },
     }
   ],

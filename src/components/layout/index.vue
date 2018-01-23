@@ -9,15 +9,15 @@
     </div>
 </template>
 
-
 <script>
 import store from './store';
 import header from './components/Header';
 import navigation from './components/Navigation';
 import footer from './components/Footer';
+import { createNamespacedHelpers } from 'vuex';
+const { mapState, mapActions } = createNamespacedHelpers('$_layout');
 export default {
 	components: {
-		props: ['children'],
 		baHeader: header,
 		baNavigation: navigation,
 		baFooter: footer,
@@ -25,7 +25,9 @@ export default {
 	created() {
 		this.$store.registerModule('$_layout', store);
 	},
-	mounted() {},
+	mounted() {
+		this.$store.dispatch('$_layout/loadMenu');
+	},
 	destroyed() {
 		this.$store.unregisterModule('$_layout');
 	},

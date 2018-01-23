@@ -11,19 +11,21 @@
 				</span>
 			</div>
 			<!-- end user info -->
-        <smart-menu :rawItems="[]"></smart-menu>
+        <smart-menu :rawItems="menuItems"></smart-menu>
         <!-- <minify-menu></minify-menu> -->
     </aside>
 </template>
 <script>
 import SmartMenu from '@/components/layout/components/navigation/SmartMenu';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
 	components: {
 		SmartMenu,
 	},
 	computed: {
-		...mapState(['menu']),
+		...mapGetters({
+			menuItems: '$_layout/menuItems',
+		}),
 	},
 };
 </script>
